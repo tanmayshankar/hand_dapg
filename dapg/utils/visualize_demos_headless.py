@@ -5,6 +5,7 @@ import gym
 import numpy as np
 import pickle
 from mjrl.utils.gym_env import GymEnv
+from PIL import Image
 
 DESC = '''
 Helper script to visualize demonstrations.\n
@@ -40,10 +41,12 @@ def demo_playback(env_name, demo_paths):
             # Trying to use the sim render instead of the display based rendering, so that we can grab images.. 
             img = np.flipud(e.env.sim.render(600, 600))
             print("Successfully got image from sim renderer.")
-            image_list.append(img)
+            image_object = Image.fromarray(img)
+            image_object.save("DextrousHand.jpg")
+            # image_list.append(img)
             
     print("About to save image list.")
-    np.save("Trial_Image_List.npy", image_list)
+    # np.save("Trial_Image_List.npy", image_list)
 
 if __name__ == '__main__':
     main()
